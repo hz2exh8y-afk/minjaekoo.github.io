@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minjae Koo — Engineering Portfolio 2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:         #07090f;
+  --border:     rgba(255,255,255,0.08);
+  --border-hi:  rgba(255,255,255,0.14);
+  --text:       #eef2ff;
+  --muted:      #6b7a99;
+  --blue:       #5b9bff;
+  --blue2:      #2563eb;
+  --teal:       #22d3ee;
+  --orange:     #fb923c;
+  --green:      #34d399;
+  --purple:     #a78bfa;
+
+  /* Glass recipe */
+  --glass-bg:   rgba(255,255,255,0.04);
+  --glass-hi:   rgba(255,255,255,0.07);
+  --glass-shad: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+  --glass-shad-lg: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--bg); color:var(--text);
+  line-height:1.6; overflow-x:hidden;
+}
+
+/* ────────────────────────────────────────
+   CANVAS
+──────────────────────────────────────── */
+#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* ────────────────────────────────────────
+   HERO
+──────────────────────────────────────── */
+.hero{
+  position:relative;z-index:1;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:4rem 2rem 2rem;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* Big atmospheric orbs */
+.orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;}
+.orb-1{width:650px;height:650px;bottom:-15%;left:-8%;background:radial-gradient(circle,rgba(251,146,60,0.13) 0%,transparent 70%);animation:orbDrift 9s ease-in-out infinite;}
+.orb-2{width:550px;height:550px;top:5%;right:-6%;background:radial-gradient(circle,rgba(91,155,255,0.15) 0%,transparent 70%);animation:orbDrift 9s ease-in-out infinite reverse;}
+.orb-3{width:300px;height:300px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(34,211,238,0.06) 0%,transparent 70%);animation:orbDrift 12s ease-in-out infinite 2s;}
+@keyframes orbDrift{0%,100%{transform:translate(0,0)}33%{transform:translate(25px,-18px)}66%{transform:translate(-15px,25px)}}
+
+/* Skills pills row */
+.hero-pills{
+  display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;justify-content:center;
+  margin-bottom:2.75rem;
+  animation:fadeUp 0.7s ease 0.05s both;
+}
+.pills-label{font-size:0.78rem;color:var(--muted);font-weight:500;margin-right:0.25rem;}
+.pill{
+  display:flex;align-items:center;gap:0.4rem;
+  background:var(--glass-bg);
+  border:1px solid var(--border-hi);
+  backdrop-filter:blur(16px) saturate(180%);
+  -webkit-backdrop-filter:blur(16px) saturate(180%);
+  padding:0.28rem 0.85rem;border-radius:100px;
+  font-size:0.74rem;font-weight:600;color:rgba(238,242,255,0.85);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.1);
+  transition:all 0.2s;cursor:default;
+}
+.pill:hover{border-color:rgba(91,155,255,0.4);color:var(--blue);background:rgba(91,155,255,0.08);}
+
+/* Main name */
+.hero-name{
+  font-size:clamp(3.8rem,9vw,8.5rem);
+  font-weight:800;letter-spacing:-0.045em;line-height:0.95;
+  margin-bottom:0.08em;
+  animation:fadeUp 0.8s ease 0.1s both;
+}
+.hero-name .n1{color:var(--blue);}
+.hero-name .n2{color:rgba(238,242,255,0.7);}
+
+.hero-sub{
+  font-size:clamp(2.2rem,5.5vw,5.5rem);
+  font-weight:800;letter-spacing:-0.04em;line-height:1;
+  color:var(--text);margin-bottom:1.75rem;
+  animation:fadeUp 0.8s ease 0.15s both;
+}
+.hero-sub .s-teal{color:var(--teal);}
+.hero-sub .s-orange{color:var(--orange);}
+
+.hero-desc{
+  max-width:540px;margin:0 auto 2.5rem;
+  font-size:1.05rem;color:var(--muted);line-height:1.8;
+  animation:fadeUp 0.8s ease 0.22s both;
+}
+
+/* Status badge — live */
+.hero-status{
+  display:inline-flex;align-items:center;gap:0.55rem;
+  background:rgba(52,211,153,0.08);
+  border:1px solid rgba(52,211,153,0.25);
+  backdrop-filter:blur(12px);
+  padding:0.4rem 1rem;border-radius:100px;
+  font-family:'Space Mono',monospace;font-size:0.72rem;
+  color:var(--green);font-weight:700;letter-spacing:0.04em;
+  margin-bottom:2rem;
+  animation:fadeUp 0.8s ease 0.18s both;
+}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:livePulse 1.8s ease-in-out infinite;}
+@keyframes livePulse{0%,100%{opacity:1;box-shadow:0 0 8px var(--green)}50%{opacity:0.5;box-shadow:0 0 2px var(--green)}}
+
+.hero-btns{display:flex;gap:1rem;justify-content:center;animation:fadeUp 0.8s ease 0.3s both;}
+.btn-primary{
+  background:var(--blue2);color:#fff;
+  padding:0.9rem 2.25rem;border-radius:12px;
+  font-size:0.95rem;font-weight:700;text-decoration:none;
+  transition:all 0.25s;
+  box-shadow:0 0 28px rgba(37,99,235,0.5), inset 0 1px 0 rgba(255,255,255,0.15);
+}
+.btn-primary:hover{background:#1d4ed8;transform:translateY(-2px);box-shadow:0 0 40px rgba(37,99,235,0.7);}
+.btn-glass{
+  background:var(--glass-bg);color:var(--text);
+  padding:0.9rem 2.25rem;border-radius:12px;
+  font-size:0.95rem;font-weight:700;text-decoration:none;
+  border:1px solid var(--border-hi);
+  backdrop-filter:blur(16px);
+  box-shadow:var(--glass-shad);
+  transition:all 0.25s;
+}
+.btn-glass:hover{background:var(--glass-hi);border-color:rgba(255,255,255,0.2);transform:translateY(-2px);}
+
+/* ────────────────────────────────────────
+   STAT ROW
+──────────────────────────────────────── */
+.stat-row{
+  position:relative;z-index:1;
+  display:flex;gap:1rem;
+  padding:0 2rem 5rem;
+  max-width:1120px;margin:0 auto;
+  flex-wrap:wrap;justify-content:center;
+  animation:fadeUp 0.8s ease 0.4s both;
+}
+.stat-card{
+  /* GLASS */
+  background:var(--glass-bg);
+  backdrop-filter:blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  border:1px solid var(--border-hi);
+  border-radius:18px;
+  padding:1.5rem 1.75rem;
+  min-width:140px;flex:1;
+  text-align:center;
+  box-shadow:var(--glass-shad);
+  transition:all 0.3s;
+  position:relative;overflow:hidden;
+}
+.stat-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);
+}
+.stat-card:hover{
+  background:var(--glass-hi);
+  border-color:rgba(91,155,255,0.3);
+  transform:translateY(-5px);
+  box-shadow:var(--glass-shad-lg),0 0 24px rgba(91,155,255,0.1);
+}
+.stat-ico{font-size:1.5rem;margin-bottom:0.85rem;}
+.stat-num{font-size:2.5rem;font-weight:800;letter-spacing:-0.04em;line-height:1;margin-bottom:0.3rem;}
+.stat-num.c-blue{color:var(--blue);}
+.stat-num.c-teal{color:var(--teal);}
+.stat-num.c-orange{color:var(--orange);}
+.stat-num.c-green{color:var(--green);}
+.stat-num.c-purple{color:var(--purple);}
+.stat-lbl{font-size:0.76rem;color:var(--muted);font-weight:600;letter-spacing:0.03em;}
+
+/* ────────────────────────────────────────
+   SECTIONS
+──────────────────────────────────────── */
+.wrap{max-width:1120px;margin:0 auto;padding:5.5rem 2rem;position:relative;z-index:1;}
+.s-eye{
+  font-family:'Space Mono',monospace;
+  font-size:0.68rem;color:var(--blue);letter-spacing:0.14em;
+  display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;
+}
+.s-eye::before{content:'';width:2rem;height:2px;background:linear-gradient(90deg,var(--blue),var(--teal));}
+h2{font-size:clamp(1.9rem,3.5vw,2.9rem);font-weight:800;letter-spacing:-0.03em;line-height:1.1;margin-bottom:3rem;color:var(--text);}
+
+/* Glass card base */
+.gc{
+  background:var(--glass-bg);
+  backdrop-filter:blur(20px) saturate(160%);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  border:1px solid var(--border-hi);
+  border-radius:18px;
+  box-shadow:var(--glass-shad);
+  position:relative;overflow:hidden;
+}
+.gc::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent);
+}
+
+/* Striped sections */
+.alt-section{background:rgba(255,255,255,0.018);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+
+/* ────────────────────────────────────────
+   ABOUT
+──────────────────────────────────────── */
+.about-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:3.5rem;align-items:start;}
+.about-body{font-size:0.97rem;color:var(--muted);line-height:1.9;}
+.about-body p+p{margin-top:1.1rem;}
+.about-body strong{color:var(--text);font-weight:700;}
+.about-quote{
+  margin-top:2rem;padding:1.25rem 1.5rem;
+  background:linear-gradient(135deg,rgba(91,155,255,0.07),rgba(34,211,238,0.05));
+  border-left:2px solid var(--blue);border-radius:0 12px 12px 0;
+  font-size:0.87rem;color:rgba(238,242,255,0.6);font-style:italic;line-height:1.75;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.info-card{
+  background:var(--glass-bg);
+  backdrop-filter:blur(24px);border:1px solid var(--border-hi);
+  border-radius:18px;overflow:hidden;box-shadow:var(--glass-shad);
+}
+.info-card::before{content:'';display:block;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent);}
+.info-head{
+  padding:1rem 1.5rem;
+  font-family:'Space Mono',monospace;font-size:0.65rem;
+  color:rgba(255,255,255,0.28);letter-spacing:0.14em;text-transform:uppercase;
+  border-bottom:1px solid var(--border);
+}
+.info-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0.82rem 1.5rem;border-bottom:1px solid rgba(255,255,255,0.04);gap:1rem;
+}
+.info-row:last-child{border-bottom:none;}
+.i-key{font-family:'Space Mono',monospace;font-size:0.64rem;color:var(--muted);letter-spacing:0.06em;white-space:nowrap;}
+.i-val{font-size:0.84rem;font-weight:600;color:var(--text);text-align:right;}
+.i-val.green{color:var(--green);}
+.i-val.blue{color:var(--blue);}
+
+/* ────────────────────────────────────────
+   EXPERIENCE — timeline
+──────────────────────────────────────── */
+.tl-item{
+  display:grid;grid-template-columns:190px 1fr;
+  gap:3rem;padding:2.75rem 0;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.tl-item:last-child{border-bottom:none;}
+.tl-date{font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--blue);line-height:1.6;margin-bottom:0.75rem;}
+.tl-badge{
+  display:inline-block;font-family:'Space Mono',monospace;font-size:0.58rem;
+  padding:0.2rem 0.65rem;border-radius:100px;letter-spacing:0.04em;
+}
+.tl-badge.gov{background:rgba(167,139,250,0.12);color:var(--purple);border:1px solid rgba(167,139,250,0.25);}
+.tl-badge.work{background:rgba(91,155,255,0.12);color:var(--blue);border:1px solid rgba(91,155,255,0.25);}
+.tl-badge.intern{background:rgba(52,211,153,0.1);color:var(--green);border:1px solid rgba(52,211,153,0.25);}
+
+/* Company pill for Sanofi */
+.company-badge{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.2);
+  padding:0.15rem 0.65rem;border-radius:6px;
+  font-size:0.72rem;font-weight:700;color:var(--orange);
+  margin-bottom:0.5rem;
+}
+
+.tl-title{font-size:1.3rem;font-weight:800;margin-bottom:0.25rem;letter-spacing:-0.02em;color:var(--text);}
+.tl-org{font-size:0.84rem;color:var(--muted);font-weight:600;margin-bottom:1.1rem;}
+.tl-pts{list-style:none;display:grid;gap:0.5rem;}
+.tl-pts li{font-size:0.87rem;color:var(--muted);padding-left:1.25rem;position:relative;line-height:1.65;}
+.tl-pts li::before{content:'';position:absolute;left:0;top:0.62em;width:5px;height:5px;border-radius:50%;background:var(--blue);opacity:0.6;}
+.tl-pts li.highlight::before{background:var(--orange);opacity:0.9;}
+.tl-pts li.highlight{color:rgba(238,242,255,0.8);}
+
+/* ────────────────────────────────────────
+   EDUCATION
+──────────────────────────────────────── */
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.edu-card{
+  background:var(--glass-bg);
+  backdrop-filter:blur(20px);border:1px solid var(--border-hi);
+  border-radius:18px;padding:2rem;box-shadow:var(--glass-shad);
+  transition:all 0.25s;position:relative;overflow:hidden;
+}
+.edu-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--teal));}
+.edu-card:hover{background:var(--glass-hi);border-color:rgba(91,155,255,0.3);transform:translateY(-4px);box-shadow:var(--glass-shad-lg);}
+.edu-ico{font-size:1.8rem;margin-bottom:1rem;}
+.edu-deg{font-size:1.05rem;font-weight:800;line-height:1.3;margin-bottom:0.5rem;color:var(--text);}
+.edu-school{font-size:0.85rem;color:var(--blue);font-weight:700;margin-bottom:0.25rem;}
+.edu-date{font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--muted);}
+
+/* ────────────────────────────────────────
+   SKILLS
+──────────────────────────────────────── */
+.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;}
+.sk-card{
+  background:var(--glass-bg);border:1px solid var(--border-hi);
+  border-radius:16px;padding:1.5rem;
+  backdrop-filter:blur(20px);box-shadow:var(--glass-shad);
+  transition:all 0.2s;position:relative;overflow:hidden;
+}
+.sk-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);}
+.sk-card:hover{background:var(--glass-hi);border-color:rgba(91,155,255,0.25);transform:translateY(-3px);}
+.sk-head{
+  font-family:'Space Mono',monospace;font-size:0.65rem;
+  color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;
+  margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;
+}
+.sk-head::before{content:'';width:7px;height:7px;border-radius:2px;background:var(--blue);flex-shrink:0;}
+.sk-tags{display:flex;flex-wrap:wrap;gap:0.4rem;}
+.sk-tag{
+  font-size:0.75rem;font-weight:600;padding:0.28rem 0.68rem;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:7px;color:rgba(238,242,255,0.72);
+  transition:all 0.15s;cursor:default;
+}
+.sk-tag:hover{background:rgba(91,155,255,0.1);border-color:rgba(91,155,255,0.3);color:var(--blue);}
+.sk-tag.new{border-color:rgba(52,211,153,0.3);color:var(--green);background:rgba(52,211,153,0.07);}
+
+/* ────────────────────────────────────────
+   PROJECTS
+──────────────────────────────────────── */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.proj-card{
+  background:var(--glass-bg);border:1px solid var(--border-hi);
+  border-radius:18px;padding:1.75rem;
+  backdrop-filter:blur(20px);box-shadow:var(--glass-shad);
+  transition:all 0.25s;display:flex;flex-direction:column;
+  position:relative;overflow:hidden;
+}
+.proj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);}
+.proj-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--teal));transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+.proj-card:hover{background:var(--glass-hi);border-color:rgba(91,155,255,0.3);transform:translateY(-5px);box-shadow:var(--glass-shad-lg),0 0 28px rgba(91,155,255,0.08);}
+.proj-card:hover::after{transform:scaleX(1);}
+.proj-card.featured{border-color:rgba(251,146,60,0.25);}
+.proj-card.featured::after{background:linear-gradient(90deg,var(--orange),var(--purple));}
+
+.proj-badge{
+  display:inline-flex;align-items:center;gap:0.35rem;
+  font-family:'Space Mono',monospace;font-size:0.58rem;
+  padding:0.18rem 0.6rem;border-radius:100px;
+  margin-bottom:0.85rem;font-weight:700;letter-spacing:0.04em;
+  width:fit-content;
+}
+.proj-badge.ai{background:rgba(167,139,250,0.12);color:var(--purple);border:1px solid rgba(167,139,250,0.25);}
+.proj-badge.eng{background:rgba(91,155,255,0.1);color:var(--blue);border:1px solid rgba(91,155,255,0.2);}
+.proj-badge.industry{background:rgba(251,146,60,0.1);color:var(--orange);border:1px solid rgba(251,146,60,0.2);}
+.proj-badge.freelance{background:rgba(52,211,153,0.1);color:var(--green);border:1px solid rgba(52,211,153,0.2);}
+
+.proj-title{font-size:1.02rem;font-weight:800;line-height:1.3;margin-bottom:0.65rem;flex:1;color:var(--text);}
+.proj-desc{font-size:0.82rem;color:var(--muted);line-height:1.72;margin-bottom:1.15rem;}
+.proj-tags{display:flex;flex-wrap:wrap;gap:0.35rem;}
+.proj-tag{font-family:'Space Mono',monospace;font-size:0.6rem;padding:0.2rem 0.55rem;background:rgba(91,155,255,0.08);color:var(--blue);border:1px solid rgba(91,155,255,0.18);border-radius:5px;font-weight:700;}
+.proj-tag.ai-tag{background:rgba(167,139,250,0.08);color:var(--purple);border-color:rgba(167,139,250,0.2);}
+
+/* NDA banner */
+.nda-note{
+  display:flex;align-items:center;gap:0.5rem;
+  font-size:0.75rem;color:var(--muted);
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--border);border-radius:8px;
+  padding:0.5rem 0.75rem;margin-top:auto;
+  font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.03em;
+}
+
+/* ────────────────────────────────────────
+   ONE MORE THING — Apple-style reveal
+──────────────────────────────────────── */
+.omt-section{
+  position:relative;z-index:1;
+  padding:6rem 2rem;
+  text-align:center;
+  overflow:hidden;
+}
+.omt-inner{
+  max-width:760px;margin:0 auto;
+  position:relative;
+}
+.omt-label{
+  font-family:'Space Mono',monospace;
+  font-size:0.72rem;color:var(--muted);
+  letter-spacing:0.14em;text-transform:uppercase;
+  margin-bottom:1.5rem;
+  animation:fadeUp 0.8s ease both;
+}
+.omt-title{
+  font-size:clamp(2.5rem,6vw,5rem);
+  font-weight:800;letter-spacing:-0.04em;line-height:1.05;
+  margin-bottom:1.5rem;
+  background:linear-gradient(135deg,var(--blue),var(--teal),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.omt-subtitle{
+  font-size:1.15rem;color:var(--muted);line-height:1.8;
+  margin-bottom:2.5rem;max-width:580px;margin-left:auto;margin-right:auto;
+}
+
+/* 3 columns of "why hire me" */
+.omt-cards{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.25rem;margin-bottom:2.5rem;
+  text-align:left;
+}
+.omt-card{
+  background:var(--glass-bg);border:1px solid var(--border-hi);
+  border-radius:16px;padding:1.5rem;
+  backdrop-filter:blur(20px);box-shadow:var(--glass-shad);
+  transition:all 0.25s;position:relative;overflow:hidden;
+}
+.omt-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent);}
+.omt-card:hover{background:var(--glass-hi);transform:translateY(-3px);box-shadow:var(--glass-shad-lg);}
+.omt-icon{font-size:1.75rem;margin-bottom:0.85rem;}
+.omt-card-title{font-size:0.95rem;font-weight:800;margin-bottom:0.5rem;color:var(--text);}
+.omt-card-desc{font-size:0.82rem;color:var(--muted);line-height:1.7;}
+
+/* Big availability CTA */
+.omt-cta{
+  background:var(--glass-bg);border:1px solid rgba(91,155,255,0.2);
+  border-radius:20px;padding:2.5rem;
+  backdrop-filter:blur(24px);box-shadow:var(--glass-shad-lg),0 0 60px rgba(91,155,255,0.06);
+  position:relative;overflow:hidden;
+}
+.omt-cta::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--teal),var(--purple));}
+.omt-cta-inner{position:relative;z-index:1;}
+.omt-glow{position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(91,155,255,0.08) 0%,transparent 70%);pointer-events:none;}
+.omt-avail{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.25);
+  padding:0.4rem 1rem;border-radius:100px;
+  font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--green);
+  margin-bottom:1.25rem;
+}
+.omt-avail::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:livePulse 1.8s ease-in-out infinite;}
+.omt-cta h3{font-size:2rem;font-weight:800;color:var(--text);letter-spacing:-0.03em;margin-bottom:0.75rem;}
+.omt-cta p{font-size:0.95rem;color:var(--muted);line-height:1.8;margin-bottom:2rem;max-width:480px;margin-left:auto;margin-right:auto;}
+
+/* ────────────────────────────────────────
+   CONTACT
+──────────────────────────────────────── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.c-links{display:grid;gap:0.75rem;margin-top:1.5rem;}
+.c-item{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem 1.25rem;
+  background:var(--glass-bg);border:1px solid var(--border-hi);
+  border-radius:13px;text-decoration:none;
+  backdrop-filter:blur(16px);box-shadow:var(--glass-shad);
+  transition:all 0.2s;position:relative;overflow:hidden;
+}
+.c-item::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);}
+.c-item:hover{background:var(--glass-hi);border-color:rgba(91,155,255,0.3);transform:translateX(5px);box-shadow:var(--glass-shad-lg);}
+.c-ico{width:40px;height:40px;background:rgba(255,255,255,0.06);border:1px solid var(--border-hi);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;box-shadow:inset 0 1px 0 rgba(255,255,255,0.1);}
+.c-key{font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;}
+.c-val{font-size:0.87rem;font-weight:700;color:var(--text);}
+
+/* ────────────────────────────────────────
+   FOOTER
+──────────────────────────────────────── */
+footer{
+  position:relative;z-index:1;
+  border-top:1px solid var(--border);
+  padding:2.25rem 3rem;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(20px);
+}
+.f-logo{font-family:'Space Mono',monospace;font-size:0.88rem;color:var(--text);font-weight:700;}
+.f-r{font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--muted);}
+
+/* ────────────────────────────────────────
+   REVEAL ANIMATION
+──────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.up{opacity:1;transform:translateY(0);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ────────────────────────────────────────
+   RESPONSIVE
+──────────────────────────────────────── */
+@media(max-width:900px){
+  .wrap{padding:3.5rem 1.5rem;}
+  .about-grid,.edu-grid,.sk-grid,.proj-grid,.contact-grid,.omt-cards{grid-template-columns:1fr;}
+  .tl-item{grid-template-columns:1fr;gap:0.5rem;}
+  footer{flex-direction:column;gap:0.75rem;text-align:center;padding:2rem 1.5rem;}
+  .stat-row{padding:0 1.5rem 3rem;}
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- Skills pills -->
+  <div class="hero-pills">
+    <span class="pills-label">Skilled in</span>
+    <div class="pill">🏭 Operations</div>
+    <div class="pill">⚡ Automation</div>
+    <div class="pill">📦 Product Mgmt</div>
+    <div class="pill">💊 Pharma MFG</div>
+    <div class="pill">🧠 AI / ML</div>
+    <div class="pill">🤖 ABB & FANUC</div>
+  </div>
+
+  <!-- Name -->
+  <div class="hero-name">
+    <span class="n1">Minjae</span>&thinsp;<span class="n2">Koo</span>
+  </div>
+  <div class="hero-sub">
+    Engineering&thinsp;<span class="s-teal">&</span>&thinsp;<span class="s-orange">Innovation</span>
+  </div>
+
+
+
+  <p class="hero-desc">
+    Eng Tech grad · 4th-year Power &amp; Energy at McMaster. Operations, Automation &amp; Product Management co-op at Sanofi · AI systems builder · hands-on from PLC to ML.
+  </p>
+
+  <div class="hero-btns">
+    <a href="#projects" class="btn-primary">Explore Work →</a>
+    <a href="#omt" class="btn-glass">One More Thing ✦</a>
+  </div>
+</section>
+
+<!-- ═══════════════ STAT ROW ═══════════════ -->
+<div class="stat-row">
+  <div class="stat-card">
+    <div class="stat-ico">🏭</div>
+    <div class="stat-num c-orange">Now</div>
+    <div class="stat-lbl">Sanofi Co-op</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-ico">🎓</div>
+    <div class="stat-num c-blue">4th</div>
+    <div class="stat-lbl">Year McMaster</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-ico">🔧</div>
+    <div class="stat-num c-teal">8+</div>
+    <div class="stat-lbl">Projects Built</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-ico">🧠</div>
+    <div class="stat-num c-purple">3</div>
+    <div class="stat-lbl">AI Systems</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-ico">🖥️</div>
+    <div class="stat-num c-blue">4</div>
+    <div class="stat-lbl">PLC Platforms</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-ico">🌐</div>
+    <div class="stat-num c-green">3</div>
+    <div class="stat-lbl">Languages</div>
+  </div>
+</div>
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<section id="about">
+  <div class="wrap">
+    <div class="s-eye reveal">01 / ABOUT ME</div>
+    <div class="about-grid">
+      <div>
+        <h2 class="reveal">Engineer by training.<br><span style="color:var(--blue)">Builder</span> by nature.</h2>
+        <div class="about-body reveal">
+          <p>I'm a graduating <strong>Engineering Technology</strong> student — Advanced Diploma in Electromechanical Engineering Technology from Centennial College (2024), now completing a Bachelor of Technology in Power and Energy Engineering at McMaster University. My full-year industry co-op at <strong>Sanofi Canada</strong> under the <strong>FFIP (Formulation, Filling, Inspection &amp; Packaging)</strong> program spanned <strong>Operations, Automation, and Product Management</strong> in a GMP-regulated pharmaceutical environment.</p>
+          <p>My background spans <strong>industrial PLC programming</strong>, <strong>ABB &amp; FANUC robotics</strong>, and embedded systems — now extended into <strong>AI-powered diagnostics</strong>, <strong>algorithmic systems</strong>, and freelance automation projects. I operate across the full stack: hardware to software, factory floor to product roadmap.</p>
+          <p>Trilingual (Korean · English · Japanese), detail-obsessed, and always looking for problems worth solving.</p>
+          <div class="about-quote">"Minjae consistently approaches challenges with a problem-solving mindset, which has been invaluable to our organization." — Prof. Kolarith Khieu, C.E.T., Centennial College</div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="info-card">
+          <div class="info-head">// profile.json</div>
+          <div class="info-row"><span class="i-key">STATUS</span><span class="i-val green">Open to Opportunities</span></div>
+          <div class="info-row"><span class="i-key">LOCATION</span><span class="i-val">Concord, ON (GTA)</span></div>
+          <div class="info-row"><span class="i-key">GRAD_DATE</span><span class="i-val">April 2027 (McMaster)</span></div>
+          <div class="info-row"><span class="i-key">CO_OP</span><span class="i-val blue">Sanofi FFIP · Sep 25–Aug 26</span></div>
+          <div class="info-row"><span class="i-key">FIELD</span><span class="i-val">Ops · Automation · Product</span></div>
+          <div class="info-row"><span class="i-key">EMAIL</span><span class="i-val" style="font-size:0.74rem">hz2exh8y@gmail.com</span></div>
+          <div class="info-row"><span class="i-key">PHONE</span><span class="i-val">647.673.9286</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ EXPERIENCE ═══════════════ -->
+<section id="experience" class="alt-section">
+  <div class="wrap">
+    <div class="s-eye reveal">02 / EXPERIENCE</div>
+    <h2 class="reveal">Where I've Worked</h2>
+
+    <!-- Sanofi -->
+    <div class="tl-item reveal">
+      <div>
+        <div class="tl-date">Sep 2025 — Aug 2026</div>
+        <span class="tl-badge gov">Gov. Program · FFIP</span>
+      </div>
+      <div>
+        <div class="company-badge">💊 Sanofi Canada</div>
+        <div class="tl-title">Operations · Automation · Product Management Co-op</div>
+        <div class="tl-org">Sanofi · Pharmaceutical Manufacturing · Toronto, ON</div>
+        <ul class="tl-pts">
+          <li class="highlight">Selected for Sanofi's <strong>FFIP (Formulation, Filling, Inspection &amp; Packaging)</strong> program — co-op placement spanning the full pharmaceutical manufacturing pipeline.</li>
+          <li class="highlight">Supported <strong>day-to-day manufacturing operations</strong> in a GMP-regulated environment, ensuring production targets, compliance, and quality standards were met.</li>
+          <li class="highlight">Contributed to <strong>automation initiatives</strong> — working with industrial control systems, equipment qualification (IQ/OQ/PQ), and process optimization across production lines.</li>
+          <li class="highlight">Involved in <strong>product management workflows</strong> — tracking project milestones, coordinating cross-functional teams, and supporting product lifecycle activities.</li>
+          <li>Worked with Batch Records, CAPA systems, and deviation management aligned to Health Canada and FDA standards.</li>
+          <li>Collaborated with production, QA, and engineering teams to streamline workflows and resolve operational bottlenecks.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Centennial TA -->
+    <div class="tl-item reveal">
+      <div>
+        <div class="tl-date">Oct 2023 — Apr 2024</div>
+        <span class="tl-badge work">Part-time</span>
+      </div>
+      <div>
+        <div class="tl-title">Teacher's Assistant & Lab Assistant</div>
+        <div class="tl-org">Centennial College · Scarborough, ON</div>
+        <ul class="tl-pts">
+          <li>Instructed students in PLC programming, industrial robotics, hydraulic systems, and microcontroller circuit design.</li>
+          <li>Provided guidance on ABB and FANUC robot operation; supported Siemens, Allen-Bradley, Omron, and SCL PLC platforms.</li>
+          <li>Developed instructional materials and assisted with grading and student evaluations.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Freelance -->
+    <div class="tl-item reveal">
+      <div>
+        <div class="tl-date">2024 — Present</div>
+        <span class="tl-badge intern">Freelance</span>
+      </div>
+      <div>
+        <div class="tl-title">Freelance AI & Automation Engineer</div>
+        <div class="tl-org">Upwork · Remote · Various Clients</div>
+        <ul class="tl-pts">
+          <li class="highlight">Delivered AI-powered automation solutions for multiple international clients across manufacturing, finance, and data industries.</li>
+          <li>Project details restricted under NDA agreements — available to discuss scope and outcomes in interview settings.</li>
+          <li>Demonstrated ability to independently scope, build, and deliver production-ready systems under commercial contracts.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EarlyON -->
+    <div class="tl-item reveal">
+      <div>
+        <div class="tl-date">May 2024 — Aug 2024</div>
+        <span class="tl-badge intern">Internship</span>
+      </div>
+      <div>
+        <div class="tl-title">Work Study Student / Intern</div>
+        <div class="tl-org">EarlyON Child and Family Centre · North York, ON</div>
+        <ul class="tl-pts">
+          <li>Provided administrative support, maintained records, and assisted interdepartmental coordination.</li>
+          <li>Supported youth development programs and improved document accuracy through systematic proofreading.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ EDUCATION ═══════════════ -->
+<section id="education">
+  <div class="wrap">
+    <div class="s-eye reveal">03 / EDUCATION</div>
+    <h2 class="reveal">Academic Background</h2>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="edu-ico">🎓</div>
+        <div class="edu-deg">Bachelor of Technology — Power and Energy Engineering</div>
+        <div class="edu-school">McMaster University</div>
+        <div class="edu-date">Hamilton, ON · Expected April 2027 · 4th Year (In Progress)</div>
+      </div>
+      <div class="edu-card reveal">
+        <div class="edu-ico">⚡</div>
+        <div class="edu-deg">Advanced Diploma — Electromechanical Engineering Technology</div>
+        <div class="edu-school">Centennial College</div>
+        <div class="edu-date">Scarborough, ON · Graduated June 2024 · Advanced Diploma</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SKILLS ═══════════════ -->
+<section id="skills" class="alt-section">
+  <div class="wrap">
+    <div class="s-eye reveal">04 / SKILLS</div>
+    <h2 class="reveal">What I Work With</h2>
+    <div class="sk-grid">
+      <div class="sk-card reveal">
+        <div class="sk-head">PLC & Automation</div>
+        <div class="sk-tags">
+          <span class="sk-tag">Siemens</span><span class="sk-tag">Allen-Bradley</span>
+          <span class="sk-tag">Omron</span><span class="sk-tag">SCL Series</span>
+          <span class="sk-tag">Ladder Logic</span><span class="sk-tag">HMI Design</span>
+        </div>
+      </div>
+      <div class="sk-card reveal">
+        <div class="sk-head">AI & Machine Learning</div>
+        <div class="sk-tags">
+          <span class="sk-tag new">Anomaly Detection</span><span class="sk-tag new">Motor Diagnostics</span>
+          <span class="sk-tag new">Python / Scikit-learn</span><span class="sk-tag new">Signal Processing</span>
+          <span class="sk-tag new">LLM Integration</span>
+        </div>
+      </div>
+      <div class="sk-card reveal">
+        <div class="sk-head">Pharma & Compliance</div>
+        <div class="sk-tags">
+          <span class="sk-tag new">GMP Manufacturing</span><span class="sk-tag new">IQ/OQ/PQ</span>
+          <span class="sk-tag new">CAPA Systems</span><span class="sk-tag new">FDA / Health Canada</span>
+          <span class="sk-tag new">Batch Records</span>
+        </div>
+      </div>
+      <div class="sk-card reveal">
+        <div class="sk-head">Industrial Robotics</div>
+        <div class="sk-tags">
+          <span class="sk-tag">ABB RAPID</span><span class="sk-tag">FANUC TP</span>
+          <span class="sk-tag">I/O Integration</span><span class="sk-tag">Safety Systems</span>
+        </div>
+      </div>
+      <div class="sk-card reveal">
+        <div class="sk-head">Embedded & Electrical</div>
+        <div class="sk-tags">
+          <span class="sk-tag">Embedded C</span><span class="sk-tag">PIC16F777</span>
+          <span class="sk-tag">Circuit Design</span><span class="sk-tag">Motor Control</span>
+          <span class="sk-tag">Power Electronics</span><span class="sk-tag">MATLAB</span>
+        </div>
+      </div>
+      <div class="sk-card reveal">
+        <div class="sk-head">Operations & Product Mgmt</div>
+        <div class="sk-tags">
+          <span class="sk-tag new">Manufacturing Ops</span><span class="sk-tag new">Product Lifecycle</span>
+          <span class="sk-tag new">Cross-functional Teams</span><span class="sk-tag new">Project Tracking</span>
+          <span class="sk-tag new">Process Optimization</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PROJECTS ═══════════════ -->
+<section id="projects">
+  <div class="wrap">
+    <div class="s-eye reveal">05 / PROJECTS</div>
+    <h2 class="reveal">Things I've Built</h2>
+    <div class="proj-grid">
+
+      <!-- AI Motor -->
+      <div class="proj-card featured reveal">
+        <div class="proj-badge ai">✦ AI · NEW</div>
+        <div class="proj-title">AI-Powered Motor Fault Detection System</div>
+        <div class="proj-desc">Real-time anomaly detection for industrial motors using vibration and current signal analysis. ML model flags bearing wear, imbalance, and overload before failure — reducing downtime by catching issues early.</div>
+        <div class="proj-tags">
+          <span class="proj-tag ai-tag">Python</span><span class="proj-tag ai-tag">Scikit-learn</span>
+          <span class="proj-tag ai-tag">Signal Processing</span><span class="proj-tag ai-tag">FFT</span>
+          <span class="proj-tag">MQTT</span><span class="proj-tag">Edge Deployment</span>
+        </div>
+      </div>
+
+      <!-- Algo Trading -->
+      <div class="proj-card featured reveal">
+        <div class="proj-badge ai">✦ AI · NEW</div>
+        <div class="proj-title">Automated Algorithmic Trading Bot</div>
+        <div class="proj-desc">Quantitative trading system with multi-strategy signal generation, backtesting engine, and real-time execution. Integrates technical indicators with ML-based regime detection for adaptive position sizing.</div>
+        <div class="proj-tags">
+          <span class="proj-tag ai-tag">Python</span><span class="proj-tag ai-tag">Pandas / NumPy</span>
+          <span class="proj-tag ai-tag">Backtesting</span><span class="proj-tag ai-tag">ML Signals</span>
+          <span class="proj-tag">REST APIs</span><span class="proj-tag">Risk Mgmt</span>
+        </div>
+      </div>
+
+      <!-- Freelance NDA -->
+      <div class="proj-card reveal">
+        <div class="proj-badge freelance">⬡ FREELANCE · NDA</div>
+        <div class="proj-title">Confidential AI Automation Projects</div>
+        <div class="proj-desc">Multiple commercial AI and automation systems delivered for clients across manufacturing, data, and business domains via Upwork. Full details restricted under NDA.</div>
+        <div class="proj-tags">
+          <span class="proj-tag ai-tag">AI / LLM</span><span class="proj-tag ai-tag">Automation</span>
+          <span class="proj-tag">Data Pipelines</span><span class="proj-tag">API Integration</span>
+        </div>
+        <div class="nda-note">🔒 NDA protected — scope & outcomes available on request</div>
+      </div>
+
+      <!-- Magnetic Cleaner -->
+      <div class="proj-card reveal">
+        <div class="proj-badge eng">⬡ CAPSTONE 2024</div>
+        <div class="proj-title">Magnetic Cleaner — Semi-Automated Scrap Picker</div>
+        <div class="proj-desc">Electromagnet-equipped autonomous cleaner for ferromagnetic shavings. Manual + partial auto modes. 5g per pickup, 466g capacity across 93 cycles.</div>
+        <div class="proj-tags">
+          <span class="proj-tag">Embedded C</span><span class="proj-tag">PIC16F777</span>
+          <span class="proj-tag">PWM</span><span class="proj-tag">Bluetooth</span><span class="proj-tag">L298N</span>
+        </div>
+      </div>
+
+      <!-- RC Car -->
+      <div class="proj-card reveal">
+        <div class="proj-badge eng">⬡ ROBO 356</div>
+        <div class="proj-title">Remote-Controlled Vehicle with Gripper System</div>
+        <div class="proj-desc">RC car climbing 21° ramp, gripping cups via servo-controlled gripper, Bluetooth control with anti-collision ultrasonic sensing.</div>
+        <div class="proj-tags">
+          <span class="proj-tag">Arduino/PIC</span><span class="proj-tag">Bluetooth</span>
+          <span class="proj-tag">Servo Motor</span><span class="proj-tag">Ultrasonic</span>
+        </div>
+      </div>
+
+      <!-- PLC / HMI -->
+      <div class="proj-card reveal">
+        <div class="proj-badge industry">⬡ INDUSTRIAL</div>
+        <div class="proj-title">PLC Process Control + HMI Development</div>
+        <div class="proj-desc">Multi-step industrial process sequences with fault/reset ladder logic, HMI touchscreen interfaces, alarm-based logic and ABB/FANUC robot integration.</div>
+        <div class="proj-tags">
+          <span class="proj-tag">Ladder Logic</span><span class="proj-tag">HMI</span>
+          <span class="proj-tag">ABB RAPID</span><span class="proj-tag">FANUC TP</span><span class="proj-tag">LVDT</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ ONE MORE THING ═══════════════ -->
+<section id="omt" class="omt-section alt-section">
+  <div class="omt-inner">
+    <div class="omt-label reveal">// one_more_thing.exe</div>
+    <div class="omt-title reveal">One More Thing.</div>
+    <p class="omt-subtitle reveal">
+      Beyond the resume — here's what actually makes me different.
+    </p>
+
+    <div class="omt-cards">
+      <div class="omt-card reveal">
+        <div class="omt-icon">🤝</div>
+        <div class="omt-card-title">People-First Communicator</div>
+        <div class="omt-card-desc">Naturally positive and energetic — I actively build bridges between teams, not just within them. Cross-functional collaboration across production, QA, and engineering at Sanofi wasn't a challenge; it was a highlight. I lead with respect and bring energy that makes teams want to work together.</div>
+      </div>
+      <div class="omt-card reveal">
+        <div class="omt-icon">⚡</div>
+        <div class="omt-card-title">Fast, Accurate Learner</div>
+        <div class="omt-card-desc">New tech doesn't intimidate me — it excites me. Whether it's a new PLC platform, a compliance framework, or an ML library I've never touched, I don't wait to feel ready. I take action, learn fast, and deliver accurately. That bias toward action is consistent across every environment I've been in.</div>
+      </div>
+      <div class="omt-card reveal">
+        <div class="omt-icon">🧠</div>
+        <div class="omt-card-title">Industry + AI Crossover</div>
+        <div class="omt-card-desc">Real pharma manufacturing floor experience at Sanofi AND independent AI system development. I bridge the gap between industrial hardware and modern software — a combination that's genuinely rare at this stage of a career.</div>
+      </div>
+      <div class="omt-card reveal">
+        <div class="omt-icon">🤖</div>
+        <div class="omt-card-title">Deeply Passionate About AI</div>
+        <div class="omt-card-desc">Machine Learning, Deep Learning, LLMs — not just buzzwords for me. I actively study these fields outside of work and school, run personal side projects, and follow the latest research closely. AI isn't a career pivot I'm planning; it's something I'm already doing.</div>
+      </div>
+      <div class="omt-card reveal">
+        <div class="omt-icon">💼</div>
+        <div class="omt-card-title">Commercial Track Record</div>
+        <div class="omt-card-desc">Not just academic projects — I've shipped production AI systems for paying clients internationally on Upwork. I know what it takes to deliver under real constraints, not just prototype in a safe environment.</div>
+      </div>
+      <div class="omt-card reveal">
+        <div class="omt-icon">🌏</div>
+        <div class="omt-card-title">Trilingual · Three Mindsets</div>
+        <div class="omt-card-desc">Korean precision, English communication, Japanese discipline. Working across cultures isn't an adjustment — it's my default. I bring a perspective that most engineers on a team simply don't have.</div>
+      </div>
+    </div>
+
+    <div class="omt-cta reveal">
+      <div class="omt-glow"></div>
+      <div class="omt-cta-inner">
+        <div class="omt-avail">Open to Full-time Roles &amp; Contracts Starting 2025</div>
+        <h3>Let's build something real.</h3>
+        <p>I'm looking for teams that care about quality, move fast, and build things that matter — in energy, automation, pharma tech, or AI. If that's you, let's talk.</p>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+          <a href="mailto:hz2exh8y@gmail.com" class="btn-primary">Get In Touch →</a>
+          <a href="#contact" class="btn-glass">See Contact Info</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<section id="contact" class="alt-section">
+  <div class="wrap">
+    <div class="s-eye reveal">06 / CONTACT</div>
+    <div class="contact-grid">
+      <div>
+        <h2 class="reveal">Let's work<br><span style="color:var(--blue)">together.</span></h2>
+        <p class="reveal" style="font-size:0.97rem;color:var(--muted);line-height:1.85;margin-bottom:1.5rem;">
+          Open to full-time roles, contracts, and co-op opportunities in engineering, automation, and AI. Based in the GTA — available to start 2025.
+        </p>
+        <div class="c-links">
+          <a href="mailto:hz2exh8y@gmail.com" class="c-item reveal">
+            <div class="c-ico">✉️</div>
+            <div><div class="c-key">Primary Email</div><div class="c-val">hz2exh8y@gmail.com</div></div>
+          </a>
+          <a href="tel:6476739286" class="c-item reveal">
+            <div class="c-ico">📞</div>
+            <div><div class="c-key">Phone</div><div class="c-val">647.673.9286</div></div>
+          </a>
+          <div class="c-item reveal" style="cursor:default">
+            <div class="c-ico">📍</div>
+            <div><div class="c-key">Location</div><div class="c-val">8 Interchange Way, Concord, ON (GTA)</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="gc" style="padding:2.5rem;">
+          <div style="font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.5rem;">// quick_profile</div>
+          <div style="display:grid;gap:1rem;">
+            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:0.85rem;">
+              <span style="font-size:0.85rem;color:var(--muted);">Current degree</span>
+              <span style="font-size:0.85rem;font-weight:700;">McMaster BTech · 4th Year</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:0.85rem;">
+              <span style="font-size:0.85rem;color:var(--muted);">Co-op completed</span>
+              <span style="font-size:0.85rem;font-weight:700;color:var(--orange);">Sanofi FFIP · 1 Year</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:0.85rem;">
+              <span style="font-size:0.85rem;color:var(--muted);">AI projects live</span>
+              <span style="font-size:0.85rem;font-weight:700;color:var(--purple);">3 systems built</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;">
+              <span style="font-size:0.85rem;color:var(--muted);">Availability</span>
+              <span style="font-size:0.85rem;font-weight:700;color:var(--green);">Open · 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo">Minjae Koo · 2026</div>
+  <div class="f-r">Concord, ON · hz2exh8y@gmail.com</div>
+</footer>
+
+<script>
+/* ──────────────────────────────────────
+   ANIMATED PARTICLE + CIRCUIT CANVAS
+────────────────────────────────────── */
+const canvas = document.getElementById('bg-canvas');
+const ctx    = canvas.getContext('2d');
+let W, H, nodes = [], pulses = [];
+const MAX_DIST = 155;
+const NODE_COUNT = 70;
+
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+
+class Node {
+  constructor() {
+    this.x  = Math.random() * W;
+    this.y  = Math.random() * H;
+    this.vx = (Math.random() - 0.5) * 0.22;
+    this.vy = (Math.random() - 0.5) * 0.22;
+    this.r  = Math.random() * 1.4 + 0.5;
+  }
+  tick() {
+    this.x += this.vx; this.y += this.vy;
+    if (this.x < 0 || this.x > W) this.vx *= -1;
+    if (this.y < 0 || this.y > H) this.vy *= -1;
+  }
+}
+
+class Pulse {
+  constructor(a, b) {
+    this.ax = a.x; this.ay = a.y; this.bx = b.x; this.by = b.y;
+    this.t   = 0;
+    this.spd = 0.007 + Math.random() * 0.01;
+    this.clr = Math.random() > 0.55 ? '91,155,255' : Math.random() > 0.5 ? '34,211,238' : '167,139,250';
+  }
+  tick()   { this.t += this.spd; }
+  get done() { return this.t >= 1; }
+  get px() { return this.ax + (this.bx - this.ax) * this.t; }
+  get py() { return this.ay + (this.by - this.ay) * this.t; }
+}
+
+function init() { nodes = Array.from({ length: NODE_COUNT }, () => new Node()); }
+
+function spawnPulse() {
+  if (pulses.length >= 22) return;
+  const a = nodes[Math.floor(Math.random() * nodes.length)];
+  const b = nodes[Math.floor(Math.random() * nodes.length)];
+  if (Math.hypot(b.x - a.x, b.y - a.y) < MAX_DIST) pulses.push(new Pulse(a, b));
+}
+
+let frame = 0;
+function loop() {
+  ctx.clearRect(0, 0, W, H);
+
+  /* connections */
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const d = Math.hypot(nodes[j].x - nodes[i].x, nodes[j].y - nodes[i].y);
+      if (d < MAX_DIST) {
+        ctx.strokeStyle = `rgba(91,155,255,${(1 - d / MAX_DIST) * 0.18})`;
+        ctx.lineWidth   = 0.7;
+        ctx.beginPath();
+        ctx.moveTo(nodes[i].x, nodes[i].y);
+        ctx.lineTo(nodes[j].x, nodes[j].y);
+        ctx.stroke();
+      }
+    }
+  }
+
+  /* nodes */
+  nodes.forEach(n => {
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(91,155,255,0.38)';
+    ctx.fill();
+  });
+
+  /* pulses — glass-feel glow */
+  pulses.forEach(p => {
+    const fade = 1 - p.t * 0.55;
+    ctx.beginPath(); ctx.arc(p.px, p.py, 6, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${p.clr},${0.12 * fade})`; ctx.fill();
+    ctx.beginPath(); ctx.arc(p.px, p.py, 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${p.clr},${0.88 * fade})`; ctx.fill();
+  });
+
+  nodes.forEach(n => n.tick());
+  pulses.forEach(p => p.tick());
+  pulses = pulses.filter(p => !p.done);
+
+  frame++;
+  if (frame % 32 === 0) spawnPulse();
+  requestAnimationFrame(loop);
+}
+
+resize(); init(); loop();
+window.addEventListener('resize', () => { resize(); init(); });
+
+/* ──────────────────────────────────────
+   SCROLL REVEAL
+────────────────────────────────────── */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const root = entry.target.closest('.wrap,.stat-row,.omt-inner') || entry.target.parentElement;
+    const sibs = [...root.querySelectorAll('.reveal:not(.up)')];
+    const idx  = sibs.indexOf(entry.target);
+    setTimeout(() => entry.target.classList.add('up'), Math.max(0, idx) * 90);
+    io.unobserve(entry.target);
+  });
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
